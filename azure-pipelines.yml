@@ -31,3 +31,19 @@ steps:
     PathtoPublish: '$(Build.SourcesDirectory)\resultado.jtl'
     ArtifactName: 'ResultadosJMeter'
     publishLocation: 'Container'
+
+- task: PowerShell@2
+  displayName: 'Generar Reporte HTML'
+  inputs:
+    targetType: 'inline'
+    script: |
+      & "C:\Users\JeimySolanyiArguello\Desktop\apache-jmeter-5.6.3\bin\jmeter.bat" `
+      -g "$(Build.SourcesDirectory)\resultado.jtl" `
+      -o "$(Build.SourcesDirectory)\ReporteHTML"
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publicar Reporte HTML'
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)\ReporteHTML'
+    ArtifactName: 'ReporteHTML'
+    publishLocation: 'Container'
