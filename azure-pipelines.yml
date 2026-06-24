@@ -9,5 +9,5 @@ steps:
 - checkout: self
 
 - powershell: |
-    jmeter -v
-  displayName: 'Verificar instalación de JMeter'
+    & "C:\Users\JeimySolanyiArguello\Desktop\apache-jmeter-5.6.3\bin\jmeter.bat" -v
+  displayName: 'Verificar instalación JMeter'
