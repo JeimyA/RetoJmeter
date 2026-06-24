@@ -8,6 +8,26 @@ steps:
 
 - checkout: self
 
-- powershell: |
-    & "C:\Users\JeimySolanyiArguello\Desktop\apache-jmeter-5.6.3\bin\jmeter.bat" -v
+- task: PowerShell@2
   displayName: 'Verificar instalación JMeter'
+  inputs:
+    targetType: 'inline'
+    script: |
+      & "C:\Users\JeimySolanyiArguello\Desktop\apache-jmeter-5.6.3\bin\jmeter.bat" -v
+
+- task: PowerShell@2
+  displayName: 'Ejecutar Script JMeter'
+  inputs:
+    targetType: 'inline'
+    script: |
+      & "C:\Users\JeimySolanyiArguello\Desktop\apache-jmeter-5.6.3\bin\jmeter.bat" `
+      -n `
+      -t "$(Build.SourcesDirectory)\ScriptCursoJMeter.jmx" `
+      -l "$(Build.SourcesDirectory)\resultado.jtl"
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publicar resultados'
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)\resultado.jtl'
+    ArtifactName: 'ResultadosJMeter'
+    publishLocation: 'Container'
