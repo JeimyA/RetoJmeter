@@ -9,5 +9,5 @@ steps:
 - checkout: self
 
 - powershell: |
-    Write-Host "Repositorio descargado correctamente"
-  displayName: 'Validar repositorio'
+    jmeter -v
+  displayName: 'Verificar instalación de JMeter'
